@@ -1,10 +1,8 @@
 <template>
   <v-app>
     <m-side-bar />
-    <v-main>
-      <v-card height="500" class="overflow-hidden main-card">
-        <router-view></router-view>
-      </v-card>
+    <v-main class="main">
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
@@ -20,13 +18,13 @@ export default {
   },
 
   mounted: function() {
-    let elHtml = document.getElementsByTagName('html')[0]
-    elHtml.style.overflowY = 'auto'
+    let elHtml = document.getElementsByTagName("html")[0];
+    elHtml.style.overflowY = "auto";
   },
 
   destroyed: function() {
-    let elHtml = document.getElementsByTagName('html')[0]
-    elHtml.style.overflowY = null
+    let elHtml = document.getElementsByTagName("html")[0];
+    elHtml.style.overflowY = null;
   },
 
   data: () => ({
@@ -34,10 +32,3 @@ export default {
   })
 };
 </script>
-
-<style scoped>
-.main-card {
-  margin: 10px 50px;
-  padding: 30px;
-}
-</style>
