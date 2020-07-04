@@ -6,11 +6,11 @@
         <span class="font-weight-light">movie</span>
         <strong>review</strong>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <!-- <v-spacer></v-spacer>
       <v-btn text>
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
-      </v-btn>
+      </v-btn> -->
     </v-app-bar>
 
     <v-navigation-drawer app v-model="drawer" class="green lighten-4">
