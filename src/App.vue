@@ -19,6 +19,16 @@ export default {
     MSideBar
   },
 
+  mounted: function() {
+    let elHtml = document.getElementsByTagName('html')[0]
+    elHtml.style.overflowY = 'auto'
+  },
+
+  destroyed: function() {
+    let elHtml = document.getElementsByTagName('html')[0]
+    elHtml.style.overflowY = null
+  },
+
   data: () => ({
     //
   })
