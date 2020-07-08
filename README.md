@@ -4,6 +4,8 @@
 
 This project was born on a small Smart-Movie-Review, which used Flask on the process, I decided then give an improvement on the project with my knoledge on VueJs and then this tool was born!
 
+If you want to help! Please, create a branch and start to work!
+
 ## Project setup
 ```
 npm install
