@@ -26,8 +26,8 @@
         <div class="d-flex flex-column mb-6">
           <v-card-subtitle class="pl-5">
             <span>
-              Very Good!! Your review as
-              <strong>POSITIVE</strong>!!!
+              Very Good!! Your review was classified as
+              <strong>{{ usersSentiment }}</strong>!!!
             </span>
           </v-card-subtitle>
           <v-select
@@ -54,6 +54,7 @@ export default {
 
   data: () => ({
     userComment: "",
+    usersSentiment: "",
     usersSentimentFeedback: "",
     img: {
       img: img,
@@ -64,12 +65,20 @@ export default {
   }),
 
   methods: {
-    processReview() {
+    async processReview() {
       this.loading_review_classification = true;
 
-      console.log(this.userComment);
+      const translate = {
+        neg: "Negative",
+        pos: "Positive"
+      }
 
-      setTimeout(() => (this.getting_review = false), 3000);
+      await this.axios
+        .post("/movie-review-predict", { review: this.userComment })
+        .then(response => {
+          this.usersSentiment = translate[response.data.classification]
+          this.getting_review = false;
+        });
     },
 
     sendFeedback() {
