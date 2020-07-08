@@ -5,7 +5,7 @@
         <v-card-title>Harry Potter and the Deathly Hallows Part 2</v-card-title>
       </v-img>
       <!-- Show this before processing -->
-      <div v-if="getting_review">
+      <div v-if="process==0">
         <v-card-subtitle class="pb-0 pl-5 pr-5">
           <v-text-field
             v-model="userComment"
@@ -21,8 +21,9 @@
           <span>Hint: Longer reviews tend to have higher accuracy.</span>
         </v-card-subtitle>
       </div>
+
       <!-- Show this after processing -->
-      <div v-else>
+      <div v-if="process==1">
         <div class="d-flex flex-column mb-6">
           <v-card-subtitle class="pl-5">
             <span>
@@ -38,8 +39,18 @@
             v-model="usersSentimentFeedback"
           ></v-select>
         </div>
-        <div class="text-center mb-2">
-          <v-btn text color="green lighten-3" @click="sendFeedback">Send Feedback</v-btn>
+        <div class="text-center mb-5">
+          <v-btn color="green lighten-3" @click="sendFeedback">Send Feedback</v-btn>
+        </div>
+      </div>
+
+      <!-- Show this at the end of the process -->
+      <div v-if="process==2">
+        <v-card-subtitle class="pl-5">
+          <span>Thank you!!!</span>
+        </v-card-subtitle>
+        <div class="text-center mb-5">
+          <v-btn color="green lighten-3" @click="goBack">Go Back</v-btn>
         </div>
       </div>
     </v-card>
@@ -60,8 +71,8 @@ export default {
       img: img,
       alt: "Harry Potter and the Deathly Hallows Part 2"
     },
-    loading_review_classification: false,
-    getting_review: true
+    process: 0,
+    loading_review_classification: false
   }),
 
   methods: {
@@ -71,18 +82,25 @@ export default {
       const translate = {
         neg: "Negative",
         pos: "Positive"
-      }
+      };
 
       await this.axios
         .post("/movie-review-predict", { review: this.userComment })
         .then(response => {
-          this.usersSentiment = translate[response.data.classification]
-          this.getting_review = false;
+          this.usersSentiment = translate[response.data.classification];
+          this.process = 1;
         });
     },
 
     sendFeedback() {
       console.log(this.usersSentimentFeedback);
+      this.process = 2;
+    },
+
+    goBack() {
+      this.process = 0;
+      this.loading_review_classification = false;
+      this.userComment = "";
     }
   }
 };
