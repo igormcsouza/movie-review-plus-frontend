@@ -16,8 +16,8 @@
     <v-navigation-drawer app v-model="drawer" class="green lighten-4">
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title">Movie Review Plus</v-list-item-title>
-          <v-list-item-subtitle>A sweet upgrade</v-list-item-subtitle>
+          <v-list-item-title class="title">{{ title }}</v-list-item-title>
+          <v-list-item-subtitle>{{ subtitle }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -40,7 +40,7 @@
       <v-list dense nav>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>Version 2.0.0</v-list-item-title>
+            <v-list-item-title>Version {{version}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+const { version, title, subtitle } = require('../../package.json')
+
 export default {
   data() {
     return {
@@ -56,7 +58,10 @@ export default {
       drawer_items: [
         { to: "/", icon: "mdi-view-dashboard", text: "Dashboard" },
         { to: "/about", icon: "mdi-help-box", text: "About" }
-      ]
+      ],
+      version: version,
+      title: title,
+      subtitle: subtitle
     };
   }
 };
