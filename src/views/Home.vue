@@ -33,7 +33,7 @@
           </v-card-subtitle>
           <v-select
             :items="['Positive', 'Negative']"
-            label="What was yout review sentiment?"
+            label="What was your actual review sentiment?"
             class="pl-5 pr-5"
             prepend-icon="mdi-account-question-outline"
             v-model="usersSentimentFeedback"
